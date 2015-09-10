@@ -1,0 +1,28 @@
+{
+  "name": "new-relic-insights",
+  "version": "0.0.0",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha",
+    "postinstall": "grunt build"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "request": "^2.61.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "~0.5",
+    "grunt-contrib-jshint": "~0.11",
+    "grunt-contrib-uglify": "~0.9"
+  },
+  "devDependencies": {
+    "grunt-express-server": "~0.5",
+    "grunt-contrib-watch": "~0.6",
+    "jsdom": "^3.1.2",
+    "mocha": "^2.2.5",
+    "sinon": "^1.16.1"
+  }
+}
