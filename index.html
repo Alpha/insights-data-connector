@@ -14,21 +14,18 @@
   <div class="container-fluid">
     <div class="about">
       <h4>About</h4>
-      
-                <p class="text-muted">Add some information about your web data connector,
-          the service you're connecting to, your affiliation to it, or any other
-          background context. As always, provide contact information or social
-          links so people can report issues.
-        </p>
-
-      
+      <p class="text-muted">Welcome to the New Relic Insights Tableau Web Data
+        Connector! What a mouth-full. Nothing to fear: although this connector
+        isn't officially supported by either Tableau or New Relic, it's open
+        source, so you can track and report issues or suggest fixes.
+      </p>
     </div>
     <div class="social">
-      <h4>Contact</h4>
+      <h4>Resources</h4>
       <ul class="list-unstyled">
-        <li><a href="mailto:#">Email</a></li>
-        <li><a href="#">Follow on Twitter</a></li>
-        <li><a href="#">Connect on LinkedIn</a></li>
+        <li><a href="https://github.com/tableau-mkt/insights-data-connector/issues">Report an issue</a></li>
+        <li><a href="https://docs.newrelic.com/docs/insights/new-relic-insights/using-new-relic-query-language/nrql-reference">NRQL Reference</a></li>
+        <li><a href="https://docs.newrelic.com/docs/insights/new-relic-insights/adding-querying-data/querying-your-data-remotely#register">Registering a Query Key</a></li>
       </ul>
     </div>
   </div>
@@ -46,35 +43,23 @@
 <section class="jumbotron text-center">
   <div class="container">
     <h1 class="jumbotron-heading">Connect to New Relic Insights</h1>
-    
-              <form>
-            
-                <p>
-    <input class="form-control" type="text" name="AccountID" id="AccountID" placeholder="Account ID" />
-    <label class="sr-only" for="AccountID">Account ID</label>
-</p>
-            
-            
-            
-                <p>
-    <textarea class="form-control" type="text" rows="3" name="NRQLQuery" id="NRQLQuery" placeholder="NRQL Query"></textarea>
-    <label class="sr-only" for="NRQLQuery">NRQL Query</label>
-</p>
-            
-            
-                
-                <p>
-    <input class="form-control" type="password" name="password" id="password" placeholder="Password or token" />
-    <label class="sr-only" for="password">Password or token</label>
-</p>
-            
-            
-            <div>
-                <input type="submit" value="Connect" class="btn btn-lg btn-primary btn-block" />
-            </div>
-        </form>
-
-    
+    <form>
+      <p>
+        <input class="form-control" type="text" name="AccountID" id="AccountID" placeholder="Account ID" />
+        <label class="sr-only" for="AccountID">Account ID</label>
+      </p>
+      <p>
+        <textarea class="form-control" type="text" rows="3" name="NRQLQuery" id="NRQLQuery" placeholder="NRQL Query"></textarea>
+        <label class="sr-only" for="NRQLQuery">NRQL Query</label>
+      </p>
+      <p>
+        <input class="form-control" type="password" name="password" id="password" placeholder="Password or token" />
+        <label class="sr-only" for="password">API Query Key</label>
+      </p>
+      <div>
+        <input type="submit" value="Connect" class="btn btn-lg btn-primary btn-block" />
+      </div>
+    </form>
   </div>
 </section>
 
