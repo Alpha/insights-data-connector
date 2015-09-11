@@ -115,8 +115,7 @@ module.exports = function($, tableau, wdcw) {
           if (event.hasOwnProperty(propName)) {
             processedColumns.push({
               name: propName,
-              // @todo Better type inference, perhaps via regex...
-              type: typeof event[propName],
+              type: wdcw.parseColumnType(propName, event[propName]),
               // If your connector supports incremental extract refreshes, you
               // can indicate the column to use for refreshing like this:
               incrementalRefresh: propName === 'timestamp'
@@ -187,6 +186,14 @@ module.exports = function($, tableau, wdcw) {
         // You may need to perform processing to shape the data into an array of
         // objects where each object is a map of column names to values.
         events.forEach(function shapeData(event) {
+          var date;
+
+          // Convert the timestamp into a date parseable by Tableau.
+          if (event.timestamp) {
+            date = new Date(parseInt(event.timestamp, 10));
+            event.timestamp = date.toISOString();
+          }
+
           processedData.push(event);
         });
 
@@ -203,6 +210,38 @@ module.exports = function($, tableau, wdcw) {
         }
       }
     });
+  };
+
+  /**
+   * Given a column from Insights and a sample value, attempts to determine the
+   * column's type (according to Tableau).
+   *
+   * @param {string} column
+   *   The name of the Insights event property.
+   * @param {string} value
+   *   A sample value for the event property.
+   * @returns {string}
+   *   One of datetime, float, int, or string.
+   */
+  wdcw.parseColumnType = function parseColumnType(column, value) {
+    var isFloat = /^[+\-]?[0-9]*\.[0-9]+$/,
+        isInt = /^[+\-]?[0-9]+$/;
+
+    // Check if this is the timestamp column.
+    if (column === 'timestamp') {
+      return 'datetime';
+    }
+    // Check if the value is a float.
+    else if (isFloat.test(value)) {
+      return 'float';
+    }
+    // Check if the value is an integer.
+    else if (isInt.test(value)) {
+      return 'int';
+    }
+    else {
+      return 'string';
+    }
   };
 
   // You can write private methods for use above like this:

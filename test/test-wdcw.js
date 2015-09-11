@@ -117,3 +117,51 @@ describe('new-relic-insights-connector:teardown', function describesConnectorTea
   });
 
 });
+
+describe('new-relic-insights-connector:utils', function describesUtilityMethods() {
+
+  beforeEach(function connectorTearDownBeforeEach() {
+    wdcw = wdcwFactory(jQuery, {}, {});
+  });
+
+  it('returns expected column types', function connectorParseColumnTypes() {
+    var expectations = [{
+          value: '0.14',
+          column: 'doesNotMatter',
+          expectation: 'float'
+        }, {
+          value: '-135.1',
+          column: 'doesNotMatter',
+          expectation: 'float'
+        }, {
+          value: '.246',
+          column: 'doesNotMatter',
+          expectation: 'float'
+        }, {
+          value: '0',
+          column: 'doesNotMatter',
+          expectation: 'int'
+        }, {
+          value: '12345',
+          column: 'doesNotMatter',
+          expectation: 'int'
+        }, {
+          value: '-5',
+          column: 'doesNotMatter',
+          expectation: 'int'
+        }, {
+          value: 'some string with #numb3rs',
+          column: 'doesNotMatter',
+          expectation: 'string'
+        }, {
+          value: 'doesNotMatter',
+          column: 'timestamp',
+          expectation: 'datetime'
+        }];
+
+    expectations.forEach(function forEachExpectation(given) {
+      assert.equal(wdcw.parseColumnType(given.column, given.value), given.expectation);
+    });
+  });
+
+});
