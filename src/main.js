@@ -106,8 +106,17 @@ module.exports = function($, tableau, wdcw) {
       },
       success: function columnHeadersRetrieved(response) {
         var processedColumns = [],
-            event = response.results[0].events[0],
+            event,
             propName;
+
+        // Abort if the response represents an unsupported query.
+        if (!isValidInsightsResponse(response)) {
+          tableau.abortWithError('NRQL queries with aggregation are unsupported at this time.');
+          registerHeaders(processedColumns);
+          return;
+        }
+
+        event = response.results[0].events[0];
 
         // If necessary, process the response from the API into the expected
         // format (highlighted below):
@@ -179,9 +188,18 @@ module.exports = function($, tableau, wdcw) {
       },
       success: function dataRetrieved(response) {
         var processedData = [],
-            events = response.results[0].events,
             // Determine if more data is available via paging.
-            moreData = false; // @todo Implement paging.
+            moreData = false, // @todo Implement paging.
+            events;
+
+        // Abort if the response represents an unsupported query.
+        if (!isValidInsightsResponse(response)) {
+          tableau.abortWithError('NRQL queries with aggregation are unsupported at this time.');
+          registerData(processedData);
+          return;
+        }
+
+        events = response.results[0].events;
 
         // You may need to perform processing to shape the data into an array of
         // objects where each object is a map of column names to values.
@@ -265,6 +283,10 @@ module.exports = function($, tableau, wdcw) {
     }
 
     return path + '&account=' + opts.id;
+  }
+
+  function isValidInsightsResponse(response) {
+    return response.results && response.results[0] && response.results[0].events;
   }
 
   return wdcw;

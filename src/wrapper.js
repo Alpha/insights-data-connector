@@ -171,6 +171,55 @@ var wdcw = window.wdcw || {};
   };
 
   /**
+   * Extension of the web data connector API that gets the connection username.
+   *
+   * @returns {string}
+   *   The username associated with this connection.
+   */
+  connector.getUsername = function getUsername() {
+    return tableau.username;
+  };
+
+  /**
+   * Extension of the web data connector API that sets the connection username.
+   *
+   * @param {string} username
+   *   The username to be associated with this connection.
+   *
+   * @returns {string}
+   *   The username now associated with this connection.
+   */
+  connector.setUsername = function setUsername(username) {
+    tableau.username = username;
+    return tableau.username;
+  };
+
+  /**
+   * Extension of the web data connector API that gets the connection password.
+   *
+   * @returns {string}
+   *   The password associated with this connection.
+   */
+  connector.getPassword = function getPassword() {
+    return tableau.password;
+  };
+
+  /**
+   * Extension of the web data connector API that sets the connection password.
+   *
+   * @param {string} password
+   *   The password or other sensitive connection information to be associated
+   *   with this connection. The value is encrypted and stored by tableau.
+   *
+   * @returns {string}
+   *   The password now associated with this connection.
+   */
+  connector.setPassword = function setPassword(password) {
+    tableau.password = password;
+    return tableau.password;
+  };
+
+  /**
    * Extension of the web data connector API that gets the incremental extract
    * column.
    */
@@ -190,6 +239,21 @@ var wdcw = window.wdcw || {};
   connector.setIncrementalExtractColumn = function setIncrementalExtractColumn(column) {
     tableau.incrementalExtractColumn = column;
     return column;
+  };
+
+  /**
+   * A generic error handler that can be used by implementors for simplicity.
+   *
+   * @param {object} jqXHR
+   * @param {string} textStatus
+   * @param {string} errorThrown
+   */
+  connector.ajaxErrorHandler =  function ajaxErrorHandler(jqXHR, textStatus, errorThrown) {
+    var message = 'There was a problem retrieving data: "' +
+        textStatus + '" with error thrown: "' +
+        errorThrown + '"';
+
+    tableau.abortWithError(message);
   };
 
   // Register our connector, which uses logic from the connector wrapper.
