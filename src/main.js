@@ -25,29 +25,8 @@ module.exports = function($, tableau, wdcw) {
    *   performed.
    */
   wdcw.setup = function setup(phase, setUpComplete) {
-    // You may need to perform set up or other initialization tasks at various
-    // points in the data connector flow. You can do so here.
-    switch (phase) {
-      case tableau.phaseEnum.interactivePhase:
-        // Perform set up tasks that relate to when the user will be prompted to
-        // enter information interactively.
-        break;
-
-      case tableau.phaseEnum.gatherDataPhase:
-        // Perform set up tasks that should happen when Tableau is attempting to
-        // retrieve data from your connector (the user is not prompted for any
-        // information in this phase.
-        break;
-
-      case tableau.phaseEnum.authPhase:
-        // Perform set up tasks that should happen when Tableau is attempting to
-        // refresh OAuth authentication tokens.
-        break;
-    }
-
-    // Always register when initialization tasks are complete by calling this.
-    // This can be especially useful when initialization tasks are asynchronous
-    // in nature.
+    // Set the incremental extract refresh column header, irrespective of phase.
+    this.setIncrementalExtractColumn('timestamp');
     setUpComplete();
   };
 
@@ -124,10 +103,7 @@ module.exports = function($, tableau, wdcw) {
           if (event.hasOwnProperty(propName)) {
             processedColumns.push({
               name: propName,
-              type: wdcw.parseColumnType(propName, event[propName]),
-              // If your connector supports incremental extract refreshes, you
-              // can indicate the column to use for refreshing like this:
-              incrementalRefresh: propName === 'timestamp'
+              type: wdcw.parseColumnType(propName, event[propName])
             });
           }
         }
