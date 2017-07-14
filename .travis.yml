@@ -1,23 +1,23 @@
 language: node_js
 node_js:
-  - '4'
+- '4'
 
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
 
 before_install:
-  - npm install -g grunt-cli
+- npm install -g grunt-cli
 
 deploy:
   provider: heroku
   api_key:
-    secure: XIb2akqVREhdZcLRHy+q02ISCLsaj7z1gft8bOjo002qhO0vqppjPI8fKBTCWm+eEox74ILpHzsGBgB8K4J4qiQInVcykUf2+8mKNj4iUbvXtf4un134WcM8jcNCfUUlSOT+J6rChogK6q4DXJzOJ/DEiFA7eWlh/UpVC0FHHqaHTf7fLEi/wHVR/YFVxG9IEAAghd4sdHcu+sd1T1exiRbFVzR70ga9LyDHIzRYvRZhnJ1/oGPS57a96g2yimpgGEo06/BCIRXLpq4+x553o515TZ0z64dE9NJKNq2z1tZEsCVXgsTJaIG5WSzq+i6wtqPBI/9D4DOq8DIYesp2Z3WlFtFoddBPQdnYlsf44Cg85Twibw84ughvtzbh2q67TDErgReqwuZf2yQ4fIEuqwzNKwGdwSz1uSRxj26H1blu07WEwN13uSwmZv3cK8+p2i4xJgqBsRtL32oKOGep+OQdOWtNTie7E9VYyLsmeSxxqSqmI0vZ6umkPwnkbT8Mqd37fjS/2RflfOOuBJ8udU37zZHq7FANeu1f3adIuqmg8iBkFKLPGZbSZhzl0iTr1I3rmzFiYGcE01XiI7LN+FLFqZUuarRm/I9uwPskAGJvtemgm+AD5ECWX+VWvTzlet5HtX0MsemirZWYtv83yWDHa0Y6Av5EPhpZxviRVR0=
+    secure: zjnQwdehSBPLEbFFJ74eVQRAE7pJe0h2E0uHBaBd31L4Heah7u0QHK5ikkSVFfFc8Ds+jVdTbkdTmnQrsn0jk8T3kJdc//sNgk+jzU8JjIcqVKXGGi/iIbyyzR6SvzueMj1Aup+xUXAqEa1bh6jH8XXiPxcxttCB47CkyiWJILstwJrRn38whnQ2e3nl6yax+0L+zIwQNlGn4f8yP94qcK6+WFRQZbZJqMJ2+WzvO6QOgmUUq3iLTjfJpvv8gi7ihg2Fae8yjvVCxZJaiN2A5ekDKs85Qy5bIjggNddRWBnagVqrpCgdQMqLy7yZdC/3PG9MJ+zrmOg4Ic1w4ygj3Mrgg/P1720v7NG0oFiwBFUpg5pZmjWHAco5izVQIv4ztY3C64cTPUa8Zg7LkfctK+3lS2Y+n3cYGMXDguiwvTVEOv5kgsK7CbD4Z7du05yRrHWkayagZKXwOmgXK2MNj0hi0X2pu0wHD4yBs8mCgsXdMgSBtYsxRNbrckAZi2/F+qfURq3SzHwn9WphwXC4EWF9S5E3WL9h63KKlP6Jz82Lss5HxhljhgG3Uvc54dRJbc2e7Hegp09qySDnl+TObLB8W3q++TJ3dSKrP3OVSyRZZVzf4rpG88yO3oLOkvhYCt2KabD0xNhVBZbuGpuwCcTSEW4yC3vf0ZxiK6tQfMA=
   app:
     master: insights-web-data-connector
